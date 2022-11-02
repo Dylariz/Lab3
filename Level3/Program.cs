@@ -14,27 +14,22 @@ namespace Level3
         
         static void Number5() // Упорядочить по возрастанию элементы массива с четными индексами (остальные элементы оставить на своих местах).
         {
-            int[] arr = InputArray(); // { 4, 6, -1, 3, 13, -11, 2, 1, 43, -2, -7, 5 };
-            
-            int[] arr2 = new int[(int)Math.Ceiling(arr.Length / 2.0)];
-            
-            for (int i = 0; i < arr.Length; i++)
+            int[] arr = { 4, 6, -1, 3, 13, -11, 2, 1, 43, -2, -7, 5 }; // { 4, 6, -1, 3, 13, -11, 2, 1, 43, -2, -7, 5 };
+            bool flag = true;
+            while (flag)
             {
-                if (i % 2 == 0)
+                flag = false;
+                for (int j = 0; j < Math.Ceiling(arr.Length / 2.0) - 1; j++)
                 {
-                    arr2[i/2] = arr[i];
+                    int p = j * 2;
+                    if (arr[p] > arr[p + 2])
+                    {
+                        flag = true;
+                        (arr[p], arr[p + 2]) = (arr[p + 2], arr[p]);
+                    }
                 }
             }
-            BubleSort(ref arr2);
-            
-            for (int i = 0; i < arr.Length; i++)
-            {
-                if (i % 2 == 0)
-                {
-                    arr[i] = arr2[i/2];
-                }
-            }
-            
+
             PrintArray(arr);
         }
         static void Number8() // Упорядочить по убыванию отрицательные элементы массива, сохраняя остальные элементы на прежних местах.
@@ -66,7 +61,7 @@ namespace Level3
             
             PrintArray(arr);
         }
-        
+
         #region FunctionalMethods
         static int IndexOfFirst<T>(IEnumerable<T> arr, T value)
         {
